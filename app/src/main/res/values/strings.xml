@@ -1,0 +1,30 @@
+<resources>
+    <!-- Main -->
+    <string name="app_name">CL Manager</string>
+    <string name="app_description">To set up a trigger, mark your selection and hit save.</string>
+
+    <!-- Actions -->
+    <string name="action_settings">Settings</string>
+
+    <!-- Triggers -->
+    <string name="trigger_none_name">None</string>
+    <string name="trigger_none">none</string>
+    <string name="trigger_charging_or_full_name">Battery charging or full</string>
+    <string name="trigger_charging_or_full">battery-charging-or-full</string>
+    <string name="trigger_charging_name">Battery charging</string>
+    <string name="trigger_charging">battery-charging</string>
+    <string name="trigger_full_name">Battery full</string>
+    <string name="trigger_full">battery-full</string>
+    <string name="trigger_internal_memory_name">Internal memory activity</string>
+    <string name="trigger_internal_memory">mmc0</string>
+    <string name="trigger_external_memory_name">External memory activity</string>
+    <string name="trigger_external_memory">mmc1</string>
+
+    <!-- Settings -->
+    <string name="settings_saved">Success saving your settings!</string>
+    <string name="settings_selection_key">selected_trigger</string>
+    <string name="settings_boot_succeded">Success setting up the previously selected trigger \'%s\'.</string>
+
+    <!-- TODO: Implement the following as well. -->
+    <!-- timer battery-charging-blink-full-solid -->
+</resources>

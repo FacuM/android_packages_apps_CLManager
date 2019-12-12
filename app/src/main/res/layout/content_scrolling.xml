@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ScrollingActivity"
+    tools:showIn="@layout/activity_scrolling"
+    android:layout_margin="@dimen/activity_margin">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/app_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_margin"
+            android:paddingTop="@dimen/text_padding"
+            android:text="@string/app_description" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_below="@id/app_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radio_none"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_none_name" />
+
+            <RadioButton
+                android:id="@+id/radio_charging_or_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_charging_or_full_name" />
+
+            <RadioButton
+                android:id="@+id/radio_charging"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_charging_name" />
+
+            <RadioButton
+                android:id="@+id/radio_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_full_name" />
+
+            <RadioButton
+                android:id="@+id/radio_internal_memory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_internal_memory_name" />
+
+            <RadioButton
+                android:id="@+id/radio_external_memory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_external_memory_name" />
+        </RadioGroup>
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
