@@ -5,6 +5,7 @@ CL Manager
 
 ### Requirements
 - Root access
+- [HARPIA only] the charger must be connected, as this is a hardware limitation.
 
 ### Installation
 - Download the APK
