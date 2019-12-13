@@ -3,7 +3,7 @@
     <string name="app_name">CL Manager</string>
     <string name="action_settings">Configurações</string>
     <string name="app_description">Para definir um gatilho, faça sua seleção e pressione salvar.</string>
-    <string name="settings_boot_succeeded">Êxito na configuração do gatilho \'%s\\\' selecionado anteriormente.</string>
+    <string name="settings_boot_succeeded">Êxito na configuração do gatilho \'%s\' selecionado anteriormente.</string>
     <string name="settings_failure">Não foi possível aplicar suas alterações. Seu dispositivo têm root?</string>
     <string name="settings_hint_delay_off">Tempo em (ms)</string>
     <string name="settings_hint_delay_on">Tempo fora (ms)</string>
