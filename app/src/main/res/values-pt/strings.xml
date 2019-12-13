@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CL Manager</string>
+    <string name="action_settings">Configurações</string>
+    <string name="app_description">Para definir um gatilho, faça sua seleção e pressione salvar.</string>
+    <string name="settings_boot_succeeded">Êxito na configuração do gatilho \'%s\\\' selecionado anteriormente.</string>
+    <string name="settings_failure">Não foi possível aplicar suas alterações. Seu dispositivo têm root?</string>
+    <string name="settings_hint_delay_off">Tempo em (ms)</string>
+    <string name="settings_hint_delay_on">Tempo fora (ms)</string>
+    <string name="settings_saved">Sucesso ao salvar suas configurações!</string>
+    <string name="trigger_charging_multi_name">Pisque durante o carregamento e sólido quando estiver cheio</string>
+    <string name="trigger_charging_name">Ao carregar</string>
+    <string name="trigger_charging_or_full_name" translatable="false">Bateria carregando ou cheia</string>
+    <string name="trigger_external_memory_name">Atividade de memória externa</string>
+    <string name="trigger_full_name">Bateria cheia</string>
+    <string name="trigger_internal_memory_name">Atividade de memória interna</string>
+    <string name="trigger_none_name">Nenhum</string>
+    <string name="trigger_timer_name">Temporizador (intervalo)</string>
+</resources>

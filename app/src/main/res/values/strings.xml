@@ -1,5 +1,5 @@
 <resources>
-    
+
     <!-- Main -->
     <string name="app_name">CL Manager</string>
     <string name="app_description">To set up a trigger, mark your selection and hit save.</string>
