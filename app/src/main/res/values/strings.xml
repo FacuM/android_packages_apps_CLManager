@@ -1,4 +1,5 @@
 <resources>
+    
     <!-- Main -->
     <string name="app_name">CL Manager</string>
     <string name="app_description">To set up a trigger, mark your selection and hit save.</string>
@@ -34,6 +35,4 @@
     <string name="settings_hint_delay_on">Delay on (ms)</string>
     <string name="settings_hint_delay_off">Delay off (ms)</string>
 
-    <!-- TODO: Implement the following as well. -->
-    <!-- timer -->
 </resources>
