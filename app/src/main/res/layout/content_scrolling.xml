@@ -34,6 +34,12 @@
                 android:text="@string/trigger_none_name" />
 
             <RadioButton
+                android:id="@+id/radio_charging_multi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_charging_multi_name" />
+
+            <RadioButton
                 android:id="@+id/radio_charging_or_full"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -62,7 +68,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/trigger_external_memory_name" />
+
+            <RadioButton
+                android:id="@+id/radio_timer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_timer_name" />
         </RadioGroup>
+
+        <EditText
+            android:id="@+id/delay_on"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:hint="@string/settings_hint_delay_on"
+            android:layout_below="@id/radio_group"
+            android:visibility="gone"
+            android:importantForAutofill="no" />
+
+        <EditText
+            android:id="@+id/delay_off"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="number"
+            android:hint="@string/settings_hint_delay_off"
+            android:layout_below="@id/delay_on"
+            android:visibility="gone"
+            android:importantForAutofill="no" />
+
     </RelativeLayout>
 
 </androidx.core.widget.NestedScrollView>

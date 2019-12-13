@@ -43,7 +43,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
                         Log.d(TAG, "setTrigger: " + result);
 
-                        Toast.makeText(context, String.format(context.getString(R.string.settings_boot_succeded), selectedTrigger), Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, String.format(context.getString(R.string.settings_boot_succeeded), selectedTrigger), Toast.LENGTH_LONG).show();
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
