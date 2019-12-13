@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">CL Manager</string>
+    <string name="action_settings">Configuraciones</string>
+    <string name="app_description">Para configurar un disparador, haz tu selección y presiona guardar.</string>
+    <string name="settings_boot_succeeded">Éxito configurando el disparador previamente seleccionado \'%s\'.</string>
+    <string name="settings_failure">No fue posible aplicar los cambios, ¿tu dispositivo está rooteado?</string>
+    <string name="settings_hint_delay_off">Tiempo apagado (ms)</string>
+    <string name="settings_hint_delay_on">Tiempo encendido (ms)</string>
+    <string name="settings_saved">¡Éxito guardando tus configuraciones!</string>
+    <string name="trigger_charging_multi_name">Parpadear mientras carga y sólido cuando esté cargado</string>
+    <string name="trigger_charging_name">Cuando esté cargando</string>
+    <string name="trigger_external_memory_name">Actividad de la memoria externa</string>
+    <string name="trigger_full_name">Cuando esté cargado</string>
+    <string name="trigger_internal_memory_name">Actividad de la memoria interna</string>
+    <string name="trigger_none_name">Ninguno</string>
+    <string name="trigger_timer_name">Temporizador (intervalo)</string>
+    <string name="trigger_charging_or_full_name" translatable="false">Cuando esté cargando o esté cargado</string>
+</resources>

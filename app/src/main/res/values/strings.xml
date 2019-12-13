@@ -8,27 +8,27 @@
 
     <!-- Triggers -->
     <string name="trigger_none_name">None</string>
-    <string name="trigger_none">none</string>
+    <string name="trigger_none" translatable="false">none</string>
     <string name="trigger_charging_multi_name">Blink while charging and still when full</string>
-    <string name="trigger_charging_multi">battery-charging-blink-full-solid</string>
+    <string name="trigger_charging_multi" translatable="false">battery-charging-blink-full-solid</string>
     <string name="trigger_charging_or_full_name">Battery charging or full</string>
-    <string name="trigger_charging_or_full">battery-charging-or-full</string>
+    <string name="trigger_charging_or_full" translatable="false">battery-charging-or-full</string>
     <string name="trigger_charging_name">Battery charging</string>
-    <string name="trigger_charging">battery-charging</string>
+    <string name="trigger_charging" translatable="false">battery-charging</string>
     <string name="trigger_full_name">Battery full</string>
-    <string name="trigger_full">battery-full</string>
+    <string name="trigger_full" translatable="false">battery-full</string>
     <string name="trigger_internal_memory_name">Internal memory activity</string>
-    <string name="trigger_internal_memory">mmc0</string>
+    <string name="trigger_internal_memory" translatable="false">mmc0</string>
     <string name="trigger_external_memory_name">External memory activity</string>
-    <string name="trigger_external_memory">mmc1</string>
+    <string name="trigger_external_memory" translatable="false">mmc1</string>
     <string name="trigger_timer_name">Timer (interval)</string>
-    <string name="trigger_timer">timer</string>
-    <string name="trigger_timer_delay_on">delay_on</string>
-    <string name="trigger_timer_delay_off">delay_off</string>
+    <string name="trigger_timer" translatable="false">timer</string>
+    <string name="trigger_timer_delay_on" translatable="false">delay_on</string>
+    <string name="trigger_timer_delay_off" translatable="false">delay_off</string>
 
     <!-- Settings -->
     <string name="settings_saved">Success saving your settings!</string>
-    <string name="settings_selection_key">selected_trigger</string>
+    <string name="settings_selection_key" translatable="false">selected_trigger</string>
     <string name="settings_failure">Couldn\'t apply your changes, is your device rooted?</string>
     <string name="settings_boot_succeeded">Success setting up the previously selected trigger \'%s\'.</string>
     <string name="settings_hint_delay_on">Delay on (ms)</string>
