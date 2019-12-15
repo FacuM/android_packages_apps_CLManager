@@ -204,6 +204,8 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isRooted()) {
+                    usesVirtualNotificationsMode = false;
+                    
                     switch (mRadioGroup.getCheckedRadioButtonId()) {
                         case R.id.radio_none:
                             setTrigger(getString(R.string.trigger_none));
