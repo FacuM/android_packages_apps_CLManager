@@ -16,6 +16,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
 
     private final String TAG = "BootCompletedReceiver";
 
+    private final String path = "/sys/class/leds/charging/";
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action = intent.getAction();
@@ -30,7 +32,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
                     Log.d(TAG, "setTrigger: configuring trigger to previously selected '" + selectedTrigger + "'...");
 
                     try {
-                        Process process = Runtime.getRuntime().exec("su -c echo " + selectedTrigger + " > /sys/class/leds/charging/trigger");
+
+                        Process process = Runtime.getRuntime().exec("su -c echo " + selectedTrigger + " > " + path + "trigger");
 
                         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
 
@@ -39,6 +42,14 @@ public class BootCompletedReceiver extends BroadcastReceiver {
                         String line;
                         while ((line = bufferedReader.readLine()) != null) {
                             result.append(line);
+                        }
+
+                        long delayOn = sharedPreferences.getLong(context.getString(R.string.settings_virtual_delay_on), 500);
+                        long delayOff = sharedPreferences.getLong(context.getString(R.string.settings_virtual_delay_off), 500);
+
+                        if (selectedTrigger.equals(context.getString(R.string.trigger_timer))) {
+                            Runtime.getRuntime().exec("su -c echo " + delayOn + " > " + path + context.getString(R.string.trigger_timer_delay_on));
+                            Runtime.getRuntime().exec("su -c echo " + delayOff + " > " + path + context.getString(R.string.trigger_timer_delay_off));
                         }
 
                         Log.d(TAG, "setTrigger: " + result);
@@ -50,5 +61,8 @@ public class BootCompletedReceiver extends BroadcastReceiver {
                 }
             }
         }
+
+        Intent notificationListenerIntent = new Intent(context, NotificationListenerService.class);
+        context.startService(notificationListenerIntent);
     }
 }

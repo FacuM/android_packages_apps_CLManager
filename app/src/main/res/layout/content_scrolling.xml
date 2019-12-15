@@ -74,6 +74,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/trigger_timer_name" />
+
+            <RadioButton
+                android:id="@+id/radio_notifications"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trigger_notifications_name" />
         </RadioGroup>
 
         <EditText
@@ -95,6 +101,15 @@
             android:layout_below="@id/delay_on"
             android:visibility="gone"
             android:importantForAutofill="no" />
+
+        <TextView
+            android:id="@+id/hint_bug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/delay_off"
+            android:layout_margin="@dimen/text_margin"
+            android:visibility="gone"
+            android:text="@string/hint_notifications_bug" />
 
     </RelativeLayout>
 

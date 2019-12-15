@@ -24,12 +24,22 @@
     <string name="trigger_external_memory" translatable="false">mmc1</string>
     <string name="trigger_timer_name">Timer (interval)</string>
     <string name="trigger_timer" translatable="false">timer</string>
+    <string name="trigger_notifications_name">Notifications</string>
     <string name="trigger_timer_delay_on" translatable="false">delay_on</string>
     <string name="trigger_timer_delay_off" translatable="false">delay_off</string>
+
+    <!-- Requests -->
+    <string name="notifications_request">Please allow me to read your notifications.</string>
+
+    <!-- Hints -->
+    <string name="hint_notifications_bug">If the LED doesn\'t light up after receiving one or more notifications, make sure that the application has been allowed to read your notifications, then, try restarting it.</string>
 
     <!-- Settings -->
     <string name="settings_saved">Success saving your settings!</string>
     <string name="settings_selection_key" translatable="false">selected_trigger</string>
+    <string name="settings_virtual_mode_key" translatable="false">uses_notifications</string>
+    <string name="settings_virtual_delay_on" translatable="false">delay_on</string>
+    <string name="settings_virtual_delay_off" translatable="false">delay_off</string>
     <string name="settings_failure">Couldn\'t apply your changes, is your device rooted?</string>
     <string name="settings_boot_succeeded">Success setting up the previously selected trigger \'%s\'.</string>
     <string name="settings_hint_delay_on">Delay on (ms)</string>
