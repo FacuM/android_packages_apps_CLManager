@@ -41,12 +41,17 @@ public class ScrollingActivity extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
 
     private void testTimerData() {
+        pushAndLog("Testing timer configuration...");
+
         if (mRadioGroup.getCheckedRadioButtonId() == R.id.radio_timer || mRadioGroup.getCheckedRadioButtonId() == R.id.radio_notifications) {
             long delayOn = sharedPreferences.getLong(getString(R.string.settings_virtual_delay_on), 500);
             long delayOff = sharedPreferences.getLong(getString(R.string.settings_virtual_delay_off), 500);
 
             mDelayOn.setText(String.valueOf(delayOn));
             mDelayOff.setText(String.valueOf(delayOff));
+
+            pushAndLog("delayOn: " + delayOn);
+            pushAndLog("delayOff: " + delayOff);
 
             try {
                 Runtime.getRuntime().exec("su -c echo " + delayOn + " > " + path + getString(R.string.trigger_timer_delay_on));
@@ -58,12 +63,18 @@ public class ScrollingActivity extends AppCompatActivity {
             mDelayOn.setVisibility(View.VISIBLE);
             mDelayOff.setVisibility(View.VISIBLE);
         } else {
-            mDelayOn.setVisibility(View.GONE);
-            mDelayOff.setVisibility(View.GONE);
+            if (!BuildConfig.DEBUG) {
+                mDelayOn.setVisibility(View.GONE);
+                mDelayOff.setVisibility(View.GONE);
+            }
         }
+
+        pushAndLog("Done setting up the timer.");
     }
 
     private boolean isRooted() {
+        pushAndLog("Making sure that the device is rooted and we're allowed to run as such...");
+
         try {
             int returnCode;
 
@@ -90,7 +101,7 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     private void setTrigger(String trigger) {
-        Log.d(TAG, "setTrigger: configuring trigger to '" + trigger + "'...");
+        pushAndLog("Configuring trigger to '" + trigger + "'...");
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -112,12 +123,22 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     private void sendTimerSettings() {
+        pushAndLog("Writing timer settings to the real files.");
+
         try {
             Runtime.getRuntime().exec("su -c echo " + mDelayOn.getText() + " > " + path + getString(R.string.trigger_timer_delay_on));
             Runtime.getRuntime().exec("su -c echo " + mDelayOff.getText() + " > " + path + getString(R.string.trigger_timer_delay_off));
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void pushAndLog(String msg) {
+        if (BuildConfig.DEBUG) {
+            mHintBug.append(msg + "\n");
+        }
+
+        Log.d(TAG, "pushAndLog: " + msg);
     }
 
     @Override
@@ -132,11 +153,19 @@ public class ScrollingActivity extends AppCompatActivity {
         mDelayOff = findViewById(R.id.delay_off);
         mHintBug = findViewById(R.id.hint_bug);
 
+        if (BuildConfig.DEBUG) {
+            mHintBug.setText("");
+        }
+
+        pushAndLog("Debug mode started.");
+
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         usesVirtualNotificationsMode = sharedPreferences.getBoolean(getString(R.string.settings_virtual_mode_key), false);
 
         if (usesVirtualNotificationsMode) {
+            pushAndLog("Virtual notifications mode enabled.");
+
             mRadioGroup.check(R.id.radio_notifications);
 
             setTrigger(getString(R.string.trigger_none));
@@ -144,8 +173,11 @@ public class ScrollingActivity extends AppCompatActivity {
 
             mHintBug.setVisibility(View.VISIBLE);
 
+            pushAndLog("Setting up the service intent...");
             Intent notificationListenerIntent = new Intent(ScrollingActivity.this, NotificationListenerService.class);
+            pushAndLog("Stopping the service (if started)...");
             stopService(notificationListenerIntent);
+            pushAndLog("Starting the service...");
             startService(notificationListenerIntent);
         } else {
             String selectedTrigger = sharedPreferences.getString(getString(R.string.settings_selection_key), null);
@@ -153,6 +185,8 @@ public class ScrollingActivity extends AppCompatActivity {
             if (selectedTrigger == null) {
                 try {
                     String cmd = "cat /sys/class/leds/charging/trigger";
+
+                    pushAndLog("No trigger saved, first time? Grabbing it off the real file at '" + cmd + "'...");
 
                     Log.d(TAG, "onCreate: built command was: " + cmd);
 
@@ -168,13 +202,13 @@ public class ScrollingActivity extends AppCompatActivity {
                     }
 
                     selectedTrigger = result.toString().split("\\[")[1].replaceAll("].*", "").trim();
-
-                    Log.d(TAG, "onCreate: selectedTrigger: " + selectedTrigger);
                 } catch (IOException e) {
                     selectedTrigger = getString(R.string.trigger_none);
                     e.printStackTrace();
                 }
             }
+
+            pushAndLog("Success setting up the trigger. - selectedTrigger: " + selectedTrigger);
 
             if (selectedTrigger.equals(getString(R.string.trigger_none))) {
                 mRadioGroup.check(R.id.radio_none);
@@ -196,7 +230,9 @@ public class ScrollingActivity extends AppCompatActivity {
                 testTimerData();
             }
 
-            mHintBug.setVisibility(View.GONE);
+            if (!BuildConfig.DEBUG) {
+                mHintBug.setVisibility(View.GONE);
+            }
         }
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -204,8 +240,10 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isRooted()) {
+                    pushAndLog("We're rooted, it's time to keep going!");
+
                     usesVirtualNotificationsMode = false;
-                    
+
                     switch (mRadioGroup.getCheckedRadioButtonId()) {
                         case R.id.radio_none:
                             setTrigger(getString(R.string.trigger_none));
@@ -237,7 +275,11 @@ public class ScrollingActivity extends AppCompatActivity {
                             }
 
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
-                                if (!Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners").contains(getPackageName())) {
+                                if (Settings.Secure.getString(getContentResolver(), "enabled_notification_listeners").contains(getPackageName())) {
+                                    pushAndLog("Fine, I'm allowed to read your notifications!");
+                                } else {
+                                    pushAndLog("I'm not in the list of allowed notification listeners, please let me read them.");
+
                                     Toast.makeText(ScrollingActivity.this, getString(R.string.notifications_request), Toast.LENGTH_LONG).show();
                                     startActivity(new Intent(ACTION_NOTIFICATION_LISTENER_SETTINGS));
                                 }
@@ -261,9 +303,13 @@ public class ScrollingActivity extends AppCompatActivity {
                         sharedPreferences.edit().putBoolean(getString(R.string.settings_virtual_mode_key), false).apply();
                     }
 
+                    pushAndLog("Your changes have been saved!");
+
                     Snackbar.make(view, R.string.settings_saved, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 } else {
+                    pushAndLog("Unable to acquire root, please check your allowed apps in your root manager.");
+
                     Snackbar.make(view, R.string.settings_failure, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }
@@ -276,7 +322,9 @@ public class ScrollingActivity extends AppCompatActivity {
                 if (i == R.id.radio_notifications) {
                     mHintBug.setVisibility(View.VISIBLE);
                 } else {
-                    mHintBug.setVisibility(View.GONE);
+                    if (!BuildConfig.DEBUG) {
+                        mHintBug.setVisibility(View.GONE);
+                    }
                 }
 
                 testTimerData();

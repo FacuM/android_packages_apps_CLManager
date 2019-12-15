@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -19,6 +20,13 @@ public class NotificationListenerService extends android.service.notification.No
     private SharedPreferences sharedPreferences;
 
     public NotificationListenerService() {}
+
+    private void pushAndLog(String msg) {
+        if (BuildConfig.DEBUG) {
+            Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            Log.d(TAG, "pushAndLog: " + msg);
+        }
+    }
 
     private void setTrigger(String trigger) {
         Log.d(TAG, "setTrigger: configuring trigger to '" + trigger + "'...");
@@ -52,18 +60,18 @@ public class NotificationListenerService extends android.service.notification.No
         currentTrigger = getString(R.string.trigger_none);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        Log.d(TAG, "onCreate: success starting service.");
+        pushAndLog("onCreate: Success starting NotificationListenerService.");
     }
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        Log.d(TAG, "onNotificationPosted: notification received.");
-
         if (sbn.getNotification().flags != Notification.FLAG_ONGOING_EVENT) {
             notificationsCount++;
 
             setTrigger(getString(R.string.trigger_timer));
         }
+
+        pushAndLog("onNotificationPosted: A notification has been received (" + notificationsCount + " counted).");
 
         super.onNotificationPosted(sbn);
     }
@@ -78,18 +86,22 @@ public class NotificationListenerService extends android.service.notification.No
             setTrigger(getString(R.string.trigger_none));
         }
 
-        Log.d(TAG, "onNotificationRemoved: notification removed (" + notificationsCount + " left).");
+        pushAndLog("onNotificationRemoved: A notification has been removed (" + notificationsCount + " left).");
 
         super.onNotificationRemoved(sbn);
     }
 
     @Override
     public void onListenerDisconnected() {
+        pushAndLog("onListenerDisconnected: The listener is being disconnected...");
+
         super.onListenerDisconnected();
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        pushAndLog("onBind: The listener is being bound...");
+
         return super.onBind(intent);
     }
 }
