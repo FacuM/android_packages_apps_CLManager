@@ -1,5 +1,7 @@
 package me.facuarmo.clman;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -17,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -30,8 +33,11 @@ import static android.provider.Settings.ACTION_NOTIFICATION_LISTENER_SETTINGS;
 public class ScrollingActivity extends AppCompatActivity {
 
     private final String TAG = "ScrollingActivity";
+    private final String CHANNEL_ID = "CL Manager test notifications";
+    private final int NOTIFICATION_ID = 4096;
 
     private final String path = "/sys/class/leds/charging/";
+
 
     private RadioGroup mRadioGroup;
     private EditText mDelayOn;
@@ -348,6 +354,28 @@ public class ScrollingActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        } else if (id == R.id.action_test_notification) {
+            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(CHANNEL_ID, CHANNEL_ID, NotificationManager.IMPORTANCE_DEFAULT);
+
+                if (notificationManager != null) {
+                    notificationManager.createNotificationChannel(notificationChannel);
+                }
+            }
+
+            if (notificationManager != null) {
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_launcher_foreground)
+                        .setContentTitle(getString(R.string.app_name))
+                        .setContentText(getString(R.string.notification_test_text))
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
+            }
+
             return true;
         }
         return super.onOptionsItemSelected(item);

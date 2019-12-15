@@ -19,4 +19,6 @@
     <string name="trigger_notifications_name">Notificações</string>
     <string name="notifications_request">Por favor deixe-me ler suas notificações.</string>
     <string name="hint_notifications_bug">Se o LED não acender após receber uma ou mais notificações, verifique se o aplicativo está autorizado a ler suas notificações e tente reiniciá-lo.</string>
+    <string name="action_test_notification">Notificação de teste</string>
+    <string name="notification_test_text">Este é apenas um teste.</string>
 </resources>

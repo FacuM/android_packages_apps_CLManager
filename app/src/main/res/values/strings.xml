@@ -3,9 +3,13 @@
     <!-- Main -->
     <string name="app_name">CL Manager</string>
     <string name="app_description">To set up a trigger, mark your selection and hit save.</string>
+    
+    <!-- Miscellaneous -->
+    <string name="notification_test_text">This is just a test.</string>
 
     <!-- Actions -->
     <string name="action_settings">Settings</string>
+    <string name="action_test_notification">Test notification</string>
 
     <!-- Triggers -->
     <string name="trigger_none_name">None</string>
