@@ -271,6 +271,12 @@ public class ScrollingActivity extends AppCompatActivity {
         mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if (i == R.id.radio_notifications) {
+                    mHintBug.setVisibility(View.VISIBLE);
+                } else {
+                    mHintBug.setVisibility(View.GONE);
+                }
+
                 testTimerData();
             }
         });
